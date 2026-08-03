@@ -1,28 +1,24 @@
 class Solution {
     public int maxProfit(int[] prices) {
-        int profit =0;
-        int n = prices.length;
-        int lmax = prices[0];
-        int lmin = prices[0];
-        int i = 0;
+        int n=prices.length;
+        int i=0; 
+        int low=prices[0];
+        int high=prices[0];
+        int profit=0;
+
         while(i<n-1){
-            // find local minima
-            while(i<n-1 && prices[i+1]<=prices[i]){
+            //Check for the low point to buy
+            while(i<n-1 && prices[i]>=prices[i+1]){
                 i++;
             }
-            if(i==n-1){
-                break;
-            }
-            lmin = prices[i];
+            low = prices[i];
 
-            // find local maxima
-            while(i<n-1 && prices[i+1]>=prices[i]){
+            //Check for the high to sell
+            while(i<n-1 && prices[i]<=prices[i+1]){
                 i++;
             }
-            lmax = prices[i];
-
-            // add the profit 
-            profit += lmax - lmin;
+            high=prices[i];
+            profit += high-low;
         }
         return profit;
     }
